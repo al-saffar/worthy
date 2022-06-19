@@ -1,0 +1,20 @@
+** cool gradient colors
+colors={['#c0392b', '#f1c40f', '#8e44ad']}
+
+colors={['#5851DB', '#C13584', '#E1306C', '#FD1D1D', '#F77737']}
+
+
+
+         colors={['#c0392b', '#8e44ad']}
+         start={{ x: 0.5, y: 0.5 }}
+         end={{ x: 0.5, y: 1 }}
+         locations={[0, 0.7, 0.9]}
+
+
+
+
+         sort
+                  colors={['#101010', '#2B2B2B']}
+         start={{ x: 0.5, y: 0.5 }}
+         end={{ x: 0.5, y: 1 }}
+         locations={[0, 0.7, 0.9]}
