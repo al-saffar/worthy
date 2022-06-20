@@ -8,7 +8,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   frame: {
-    padding: 30,
+    marginBottom: 30,
+    marginLeft: 30,
+    marginRight: 30,
   },
   title1: {
     color: "white",
@@ -42,6 +44,30 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10,
     borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  bar: {
+    backgroundColor: "#C4C4C4",
+    height: 5,
+    width: 300,
+    borderRadius: 5,
+    marginTop: 3,
+  },
+  barstatus: {
+    backgroundColor: "#52FF6E",
+    height: 5,
+    width: 200,
+    borderRadius: 5,
+  },
+  goaltexts: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: 300,
+    paddingTop: 7,
+  },
+  goaltext: {
+    color: "black",
   },
   listitems: {
     flexWrap: "wrap",
@@ -60,9 +86,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   input: {
-    /* borderColor: "red",
-    borderStyle: "solid",
-    borderWidth: 1, */
     marginBottom: 20,
   },
   inputtext: {
