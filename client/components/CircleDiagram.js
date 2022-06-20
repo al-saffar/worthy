@@ -1,6 +1,6 @@
 import { View, Dimensions } from "react-native";
 import styles from "./../styles";
-import { diagram } from "./../diagram";
+import { category } from "../category";
 import { useEffect, useState } from "react";
 import { PieChart } from "react-native-chart-kit";
 
@@ -28,7 +28,7 @@ export default function CircleDiagram() {
   return (
     <View style={styles.piechart}>
       <PieChart
-        data={diagram}
+        data={category}
         width={Dimensions.get("window").width}
         height={260}
         chartConfig={chartConfig}

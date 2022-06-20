@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import styles from "./../styles";
 import CircleDiagram from "../components/CircleDiagram";
 import CategoryList from "../components/CategoryList";
+import Goal from "../components/Goal";
 
 export default function DashBoard({ navigation }) {
   const [greeting, setGreeting] = useState("Hey");
@@ -31,11 +32,12 @@ export default function DashBoard({ navigation }) {
     <Text>Not loaded yet.</Text>
   ) : (
     <View style={styles.background}>
-      <Text>{greeting}</Text>
       <LinearGradient colors={["#101010", "#2B2B2B"]}>
+        <Text style={styles.title1}>{greeting}</Text>
         <Text style={styles.title1}>TOTAL WORTH</Text>
         <Text style={styles.totalworth}>778.983 DKK</Text>
         <CircleDiagram />
+        <Goal />
         <CategoryList navigation={navigation} />
       </LinearGradient>
     </View>
