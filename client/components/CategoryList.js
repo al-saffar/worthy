@@ -1,31 +1,18 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import styles from "./../styles";
 import { category } from "../category";
 
-export default function CategoryList({ navigation }) {
-  const [totalAmount, setTotalAmount] = useState();
-
-  useEffect(() => {
-    calculateTotalAmount(category);
-  });
-
-  function calculateTotalAmount() {
-    let total = category.reduce((total, curr) => total + curr.amount, 0);
-    setTotalAmount(total);
-  }
-
-  function calculatePercentage(a) {
-    let percent = ((a / totalAmount) * 100).toFixed(2);
+export default function CategoryList({ navigation, totalAmount }) {
+  function calculatePercentage(amount) {
+    let percent = ((amount / totalAmount) * 100).toFixed(2);
     return percent;
-    /* console.log("amount", amount / totalAmount) * 100;
-    return (amount / totalAmount) * 100; */
   }
 
   function categories(list) {
     return list.map((element) => {
       return totalAmount ? (
-        <View key={element.id} style={styles.listitems}>
+        <View key={element.id} style={styles.listitemsleft}>
           <View
             style={{
               height: 25,
@@ -36,13 +23,11 @@ export default function CategoryList({ navigation }) {
               backgroundColor: `${element.color}`,
             }}
           ></View>
-          <View style={styles.listtexts}>
-            <Text style={styles.listtext}>{element.name}</Text>
-            <Text style={styles.listtext}>
-              {calculatePercentage(element.amount)}
-              <Text> %</Text>
-            </Text>
-          </View>
+          <Text style={styles.listtext}>{element.name}</Text>
+          <Text style={styles.listtexts}>
+            {calculatePercentage(element.amount)}
+            <Text> %</Text>
+          </Text>
         </View>
       ) : (
         <View>
@@ -57,12 +42,12 @@ export default function CategoryList({ navigation }) {
       <Text style={styles.title2}>Categories</Text>
       <View style={styles.box}>
         {categories(category)}
-        <Button
+        <TouchableOpacity
+          style={styles.addbutton}
           onPress={() => navigation.navigate("Category")}
-          title="+"
-          color="#841584"
-          accessibilityLabel="Add category"
-        />
+        >
+          <Text style={{ textAlign: "center", paddingTop: 2 }}>+</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -16,3 +16,6 @@ dependency-reduced-pom.xml
 README.html
 *.iml
 .idea
+.expo
+.vscode
+node_modules
