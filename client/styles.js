@@ -2,10 +2,15 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
     width: "100%",
-    justifyContent: "center",
+    height: "100%",
     alignItems: "center",
+  },
+  worthy: {
+    fontSize: 48,
+    color: "white",
+    textShadow: "4px 4px 4px #FFA800",
+    marginTop: 50,
   },
   frame: {
     marginBottom: 30,
@@ -15,6 +20,7 @@ const styles = StyleSheet.create({
   title1: {
     color: "white",
     textAlign: "center",
+    marginBottom: 5,
   },
   title2: {
     color: "white",
@@ -35,17 +41,13 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
     textAlign: "center",
   },
-  piechart: {
-    paddingVertical: 15,
-    flexDirection: "row",
-    width: "100%",
-  },
   box: {
     backgroundColor: "white",
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
+    width: 320,
   },
   bar: {
     backgroundColor: "#C4C4C4",
@@ -76,10 +78,17 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
+  listitemsleft: {
+    borderColor: "red",
+    borderStyle: "solid",
+    borderWidth: 1,
+  },
   listtexts: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    borderColor: "#868686",
+    borderStyle: "solid",
+    borderWidth: 1,
   },
   listtext: {
     color: "black",
@@ -99,6 +108,16 @@ const styles = StyleSheet.create({
     width: 280,
     backgroundColor: "white",
     borderRadius: 5,
+  },
+  addbutton: {
+    marginTop: 5,
+    marginBottom: 5,
+    borderColor: "#868686",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderRadius: 50,
+    width: 25,
+    height: 25,
   },
   savebutton: {
     alignItems: "center",

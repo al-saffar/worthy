@@ -26,18 +26,16 @@ export default function CircleDiagram() {
   };
 
   return (
-    <View style={styles.piechart}>
-      <PieChart
-        data={category}
-        width={Dimensions.get("window").width}
-        height={260}
-        chartConfig={chartConfig}
-        accessor={"amount"}
-        backgroundColor={"transparent"}
-        center={[100, 0]}
-        hasLegend={false}
-        absolute
-      />
-    </View>
+    <PieChart
+      data={category}
+      width={Dimensions.get("window").width}
+      height={260}
+      chartConfig={chartConfig}
+      accessor={"amount"}
+      backgroundColor={"transparent"}
+      hasLegend={false}
+      center={[120, 0]}
+      absolute
+    />
   );
 }
