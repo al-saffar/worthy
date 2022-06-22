@@ -4,6 +4,7 @@ import { useState } from "react";
 import Dashboard from "./screens/Dashboard";
 import Category from "./screens/Category";
 import Login from "./screens/Login";
+import Signup from "./screens/Signup";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -17,6 +18,11 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   ) : (
-    <Login />
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
