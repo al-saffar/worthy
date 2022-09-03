@@ -9,7 +9,7 @@ import Signup from "./screens/Signup";
 
 export default function App() {
   const Stack = createStackNavigator();
-  /*   const LoginContext = createContext(); */
+  const LoginContext = createContext();
   const [isLoggedIn, setIsLoggedin] = useState(false);
 
   return isLoggedIn ? (
