@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import styles from "./../styles";
 
-export default function SaveButton() {
+export default function SaveButton({ navigation }) {
   return (
     <View>
       <Pressable
