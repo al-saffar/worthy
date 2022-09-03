@@ -119,30 +119,6 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
-  savebutton: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: "#FFA800",
-    width: 280,
-    marginTop: 20,
-  },
-  cancelbutton: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: 280,
-    borderColor: "#868686",
-    borderStyle: "solid",
-    borderWidth: 1,
-    marginTop: 20,
-  },
 });
 
 export default styles;
