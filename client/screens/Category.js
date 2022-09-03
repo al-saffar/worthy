@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "expo install expo-linear-gradient";
 import { useState } from "react";
 import Input from "../components/Input";
 import styles from "./../styles";
