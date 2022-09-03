@@ -1,10 +1,8 @@
 import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import Input from "../components/Input";
+import CustomInput from "../components/CustomInput";
 import styles from "./../styles";
-import SaveButton from "../components/SaveButton";
-import CancelButton from "../components/CancelButton";
 
 export default function Category() {
   const [text, setText] = useState("");
@@ -14,11 +12,9 @@ export default function Category() {
   return (
     <LinearGradient colors={["#101010", "#2B2B2B"]} style={styles.background}>
       <Text style={styles.title2}>Category</Text>
-      <Input title="Name" text={text} setText={setText} />
-      <Input title="Amount" amount={amount} setAmount={setAmount} />
-      <Input title="Valuta" valuta={valuta} setValuta={setValuta} />
-      <SaveButton />
-      <CancelButton />
+      <CustomInput title="Name" text={text} setText={setText} />
+      <CustomInput title="Amount" amount={amount} setAmount={setAmount} />
+      <CustomInput title="Valuta" valuta={valuta} setValuta={setValuta} />
     </LinearGradient>
   );
 }
