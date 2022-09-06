@@ -1,27 +1,12 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  background: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-  },
-  worthy: {
-    fontSize: 48,
-    color: "white",
-    textShadow: "4px 4px 4px #FFA800",
-    marginTop: 50,
-  },
   frame: {
     marginBottom: 30,
     marginLeft: 30,
     marginRight: 30,
   },
-  title1: {
-    color: "white",
-    textAlign: "center",
-    marginBottom: 5,
-  },
+
   title2: {
     color: "white",
     textTransform: "uppercase",
@@ -93,21 +78,6 @@ const styles = StyleSheet.create({
   listtext: {
     color: "black",
     paddingLeft: 10,
-  },
-  input: {
-    marginBottom: 20,
-  },
-  inputtext: {
-    color: "white",
-    paddingBottom: 10,
-  },
-  inputbox: {
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-    width: 280,
-    backgroundColor: "white",
-    borderRadius: 5,
   },
   addbutton: {
     marginTop: 5,
