@@ -1,12 +1,11 @@
-import { View, Text, TextInput } from "react-native";
-import styles from "../styles";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 
 export default function CustomInput({ text, setText, title, secureTextEntry }) {
   return (
-    <View style={styles.input}>
-      <Text style={styles.inputtext}>{title}</Text>
+    <View style={styles.container}>
+      <Text style={styles.inputTitle}>{title}</Text>
       <TextInput
-        style={styles.inputbox}
+        style={styles.input}
         onChangeText={setText}
         value={text}
         secureTextEntry={secureTextEntry}
@@ -14,3 +13,21 @@ export default function CustomInput({ text, setText, title, secureTextEntry }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+    width: "80%",
+  },
+  inputTitle: {
+    color: "white",
+    paddingBottom: 5,
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: "white",
+    borderRadius: 5,
+    height: 50,
+  },
+});

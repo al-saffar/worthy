@@ -1,5 +1,4 @@
 import { Text } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from "react";
 
 import { category } from "../category";
@@ -40,13 +39,13 @@ export default function DashBoard({ navigation }) {
   return !greeting ? (
     <Text>Not loaded yet.</Text>
   ) : (
-    <LinearGradient colors={["#101010", "#2B2B2B"]} style={styles.background}>
+    <View>
       <Text style={styles.title1}>{greeting}</Text>
       <Text style={styles.title1}>TOTAL WORTH</Text>
       <Text style={styles.totalworth}>{totalAmount} DKK</Text>
       <CircleDiagram />
       <Goal />
       <CategoryList navigation={navigation} totalAmount={totalAmount} />
-    </LinearGradient>
+    </View>
   );
 }
