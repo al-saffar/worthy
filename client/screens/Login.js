@@ -10,54 +10,68 @@ import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import SocialLoginButtons from "../components/SocialLoginButtons";
+import ScreenTemplate from "../components/ScreenTemplate";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
-  const { height } = useWindowDimensions();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const { height } = useWindowDimensions();
+  const navigation = useNavigation();
+
   function onPressLogin() {
-    console.warn("Login is pressed");
+    // validate user
+    navigation.navigate("Home");
   }
 
   function onPressSignup() {
-    console.warn("Signup is pressed");
+    navigation.navigate("Signup");
   }
 
   function onPressForgotPassword() {
-    console.warn("Forgot password is pressed");
-  }
-
-  function onPressCreateAccount() {
-    console.warn("Create an account is pressed");
+    navigation.navigate("ResetPassword");
   }
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Image source={Logo} style={[styles.logo, { height: height * 0.3 }]} />
-        <CustomInput title="Username" value={username} setValue={setUsername} />
-        <CustomInput
-          title="Password"
-          value={password}
-          setValue={setPassword}
-          secureTextEntry={true}
-        />
-        <CustomButton onPress={onPressLogin} text="Login" type="PRIMARY" />
-        <CustomButton onPress={onPressSignup} text="Signup" type="SECONDARY" />
-        <CustomButton
-          onPress={onPressForgotPassword}
-          text="Forgot password?"
-          type="TERITARY"
-        />
-        <View style={styles.space} />
-        <SocialLoginButtons />
-        <CustomButton
-          onPress={onPressCreateAccount}
-          text="Don't have an account? Create one"
-          type="TERITARY"
-        />
-      </View>
+      <ScreenTemplate>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={[styles.logo, { height: height * 0.3 }]}
+          />
+          <CustomInput
+            title="Username"
+            value={username}
+            setValue={setUsername}
+          />
+          <CustomInput
+            title="Password"
+            value={password}
+            setValue={setPassword}
+            secureTextEntry={true}
+          />
+          <CustomButton onPress={onPressLogin} text="Login" type="PRIMARY" />
+          <CustomButton
+            onPress={onPressSignup}
+            text="Signup"
+            type="SECONDARY"
+          />
+          <CustomButton
+            onPress={onPressForgotPassword}
+            text="Forgot password?"
+            type="TERITARY"
+          />
+          <View style={styles.space} />
+          <SocialLoginButtons />
+          <CustomButton
+            onPress={onPressSignup}
+            text="Don't have an account? Create one"
+            type="TERITARY"
+          />
+        </View>
+      </ScreenTemplate>
     </ScrollView>
   );
 }

@@ -2,6 +2,7 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
+import ScreenTemplate from "../../components/ScreenTemplate";
 
 export default function ResetPassword() {
   const [username, setUsername] = useState("");
@@ -16,21 +17,23 @@ export default function ResetPassword() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Text style={styles.title}>Reset your password</Text>
-        <CustomInput
-          title="Username *"
-          value={username}
-          setValue={setUsername}
-        />
+      <ScreenTemplate>
+        <View style={styles.root}>
+          <Text style={styles.title}>Reset your password</Text>
+          <CustomInput
+            title="Username *"
+            value={username}
+            setValue={setUsername}
+          />
 
-        <CustomButton onPress={onPressConfirm} text="Send" type="PRIMARY" />
-        <CustomButton
-          onPress={onPressBackToLogin}
-          text="Back to Login"
-          type="TERITARY"
-        />
-      </View>
+          <CustomButton onPress={onPressConfirm} text="Send" type="PRIMARY" />
+          <CustomButton
+            onPress={onPressBackToLogin}
+            text="Back to Login"
+            type="TERITARY"
+          />
+        </View>
+      </ScreenTemplate>
     </ScrollView>
   );
 }

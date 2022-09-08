@@ -2,6 +2,7 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import ScreenTemplate from "../components/ScreenTemplate";
 
 export default function ConfirmEmail() {
   const [code, setCode] = useState("");
@@ -20,27 +21,33 @@ export default function ConfirmEmail() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Text style={styles.title}>Confirm your email</Text>
-        <CustomInput
-          title="Enter your confirmation code"
-          value={code}
-          setValue={setCode}
-        />
+      <ScreenTemplate>
+        <View style={styles.root}>
+          <Text style={styles.title}>Confirm your email</Text>
+          <CustomInput
+            title="Enter your confirmation code"
+            value={code}
+            setValue={setCode}
+          />
 
-        <CustomButton onPress={onPressConfirm} text="Confirm" type="PRIMARY" />
-        <CustomButton
-          onPress={onPressResendCode}
-          text="Resend code"
-          type="SECONDARY"
-        />
+          <CustomButton
+            onPress={onPressConfirm}
+            text="Confirm"
+            type="PRIMARY"
+          />
+          <CustomButton
+            onPress={onPressResendCode}
+            text="Resend code"
+            type="SECONDARY"
+          />
 
-        <CustomButton
-          onPress={onPressBackToLogin}
-          text="Back to Login"
-          type="TERITARY"
-        />
-      </View>
+          <CustomButton
+            onPress={onPressBackToLogin}
+            text="Back to Login"
+            type="TERITARY"
+          />
+        </View>
+      </ScreenTemplate>
     </ScrollView>
   );
 }

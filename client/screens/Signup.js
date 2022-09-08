@@ -3,6 +3,7 @@ import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import SocialLoginButtons from "../components/SocialLoginButtons";
+import ScreenTemplate from "../components/ScreenTemplate";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -28,44 +29,50 @@ export default function Signup() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Text style={styles.title}>Create an account</Text>
-        <CustomInput title="Username" value={username} setValue={setUsername} />
-        <CustomInput title="Email" username={email} setUsername={setEmail} />
-        <CustomInput
-          title="Password"
-          value={password}
-          setValue={setPassword}
-          secureTextEntry={true}
-        />
-        <CustomInput
-          title="Repeat Password"
-          value={passwordRepeat}
-          setValue={setPasswordRepeat}
-          secureTextEntry={true}
-        />
-        <CustomButton
-          onPress={onPressRegister}
-          text="Register"
-          type="PRIMARY"
-        />
-        <Text style={styles.confirm}>
-          By registering, you confirm that you accept our{" "}
-          <Text style={styles.link} onPress={onPressTermsOfUse}>
-            Terms of Use
-          </Text>{" "}
-          and{" "}
-          <Text style={styles.link} onPress={onPressPrivacyPolicy}>
-            Privacy Policy
+      <ScreenTemplate>
+        <View style={styles.root}>
+          <Text style={styles.title}>Create an account</Text>
+          <CustomInput
+            title="Username"
+            value={username}
+            setValue={setUsername}
+          />
+          <CustomInput title="Email" username={email} setUsername={setEmail} />
+          <CustomInput
+            title="Password"
+            value={password}
+            setValue={setPassword}
+            secureTextEntry={true}
+          />
+          <CustomInput
+            title="Repeat Password"
+            value={passwordRepeat}
+            setValue={setPasswordRepeat}
+            secureTextEntry={true}
+          />
+          <CustomButton
+            onPress={onPressRegister}
+            text="Register"
+            type="PRIMARY"
+          />
+          <Text style={styles.confirm}>
+            By registering, you confirm that you accept our{" "}
+            <Text style={styles.link} onPress={onPressTermsOfUse}>
+              Terms of Use
+            </Text>{" "}
+            and{" "}
+            <Text style={styles.link} onPress={onPressPrivacyPolicy}>
+              Privacy Policy
+            </Text>
           </Text>
-        </Text>
-        <SocialLoginButtons />
-        <CustomButton
-          onPress={onPressLogin}
-          text="Have an account? Login"
-          type="TERITARY"
-        />
-      </View>
+          <SocialLoginButtons />
+          <CustomButton
+            onPress={onPressLogin}
+            text="Have an account? Login"
+            type="TERITARY"
+          />
+        </View>
+      </ScreenTemplate>
     </ScrollView>
   );
 }
