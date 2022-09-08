@@ -8,6 +8,9 @@ import Dashboard from "./screens/Dashboard";
 import Category from "./screens/Category";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
+import ConfirmEmail from "./screens/ConfirmEmail";
+import ResetPassword from "./screens/ForgotPassword/ResetPassword";
+import NewPassword from "./screens/ForgotPassword/NewPassword";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -21,7 +24,10 @@ export default function App() {
       <SafeAreaView style={styles.root}>
         <LinearGradient colors={["#101010", "#2B2B2B"]} style={{ flex: 1 }}>
           {/* <Signup /> */}
-          <Login />
+          {/* <Login /> */}
+          {/* <ConfirmEmail /> */}
+          {/* <ResetPassword /> */}
+          <NewPassword />
         </LinearGradient>
       </SafeAreaView>
     </>

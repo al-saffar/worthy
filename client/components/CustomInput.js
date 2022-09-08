@@ -6,7 +6,7 @@ export default function CustomInput({ text, setText, title, secureTextEntry }) {
       <Text style={styles.inputTitle}>{title}</Text>
       <TextInput
         style={styles.input}
-        onChangeText={setText}
+        setValue={setText}
         value={text}
         secureTextEntry={secureTextEntry}
       />

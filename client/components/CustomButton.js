@@ -56,7 +56,9 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
   },
-  text_PRIMARY: {},
+  text_PRIMARY: {
+    fontWeight: "bold",
+  },
   text_SECONDARY: {},
   text_TERITARY: {},
 });

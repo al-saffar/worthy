@@ -1,95 +1,68 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  useWindowDimensions,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import SocialLoginButtons from "../components/SocialLoginButtons";
 
 export default function Signup() {
-  const { height } = useWindowDimensions();
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordRepeat, setPasswordRepeat] = useState("");
 
-  function onPressLogin() {
+  function onPressRegister() {
     console.warn("Login is pressed");
   }
 
-  function onPressSignup() {
-    console.warn("Signup is pressed");
+  function onPressTermsOfUse() {
+    console.warn("Terms of Use pressed");
   }
 
-  function onPressForgotPassword() {
-    console.warn("Forgot password is pressed");
+  function onPressPrivacyPolicy() {
+    console.warn("Privacy Policy pressed");
   }
 
-  function onPressFacebook() {
-    console.warn("Login with Facebook is pressed");
-  }
-
-  function onPressGoogle() {
-    console.warn("Login with Google is pressed");
-  }
-
-  function onPressApple() {
-    console.warn("Login with Apple is pressed");
-  }
-
-  function onPressCreateAccount() {
-    console.warn("Create an account is pressed");
+  function onPressLogin() {
+    console.warn("Login is pressed");
   }
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
         <Text style={styles.title}>Create an account</Text>
-        <CustomInput
-          title="Username"
-          username={username}
-          setUsername={setUsername}
-        />
+        <CustomInput title="Username" value={username} setValue={setUsername} />
+        <CustomInput title="Email" username={email} setUsername={setEmail} />
         <CustomInput
           title="Password"
-          password={password}
-          setPassword={setPassword}
+          value={password}
+          setValue={setPassword}
           secureTextEntry={true}
         />
-        <CustomButton onPress={onPressLogin} text="Login" type="PRIMARY" />
-        <CustomButton onPress={onPressSignup} text="Signup" type="SECONDARY" />
-        <CustomButton
-          onPress={onPressForgotPassword}
-          text="Forgot password?"
-          type="TERITARY"
-        />
-
-        <CustomButton
-          onPress={onPressFacebook}
-          text="Login with Facebook"
-          type="SECONDARY"
-          txtColor="#4765A9"
-          bgColor="#E7EAF4"
+        <CustomInput
+          title="Repeat Password"
+          value={passwordRepeat}
+          setValue={setPasswordRepeat}
+          secureTextEntry={true}
         />
         <CustomButton
-          onPress={onPressGoogle}
-          text="Login with Google"
-          type="SECONDARY"
-          txtColor="#DD4D44"
-          bgColor="#FAE9EA"
+          onPress={onPressRegister}
+          text="Register"
+          type="PRIMARY"
         />
+        <Text style={styles.confirm}>
+          By registering, you confirm that you accept our{" "}
+          <Text style={styles.link} onPress={onPressTermsOfUse}>
+            Terms of Use
+          </Text>{" "}
+          and{" "}
+          <Text style={styles.link} onPress={onPressPrivacyPolicy}>
+            Privacy Policy
+          </Text>
+        </Text>
+        <SocialLoginButtons />
         <CustomButton
-          onPress={onPressApple}
-          text="Login with Apple"
-          type="SECONDARY"
-          txtColor="#363636"
-          bgColor="#e3e3e3"
-        />
-        <CustomButton
-          onPress={onPressCreateAccount}
-          text="Don't have an account? Create one"
+          onPress={onPressLogin}
+          text="Have an account? Login"
           type="TERITARY"
         />
       </View>
@@ -109,5 +82,14 @@ const styles = StyleSheet.create({
     marginBottom: 35,
     fontSize: 24,
     marginTop: 30,
+  },
+  confirm: {
+    color: "white",
+    marginVertical: 5,
+    width: "80%",
+    marginBottom: 20,
+  },
+  link: {
+    color: "#FFA800",
   },
 });
