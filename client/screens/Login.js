@@ -47,63 +47,54 @@ export default function Login() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <LinearGradient colors={["#101010", "#2B2B2B"]} style={styles.background}>
-        <View style={styles.root}>
-          <Image
-            source={Logo}
-            style={[styles.logo, { height: height * 0.3 }]}
-          />
-          <CustomInput
-            title="Username"
-            username={username}
-            setUsername={setUsername}
-          />
-          <CustomInput
-            title="Password"
-            password={password}
-            setPassword={setPassword}
-            secureTextEntry={true}
-          />
-          <CustomButton onPress={onPressLogin} text="Login" type="PRIMARY" />
-          <CustomButton
-            onPress={onPressSignup}
-            text="Signup"
-            type="SECONDARY"
-          />
-          <CustomButton
-            onPress={onPressForgotPassword}
-            text="Forgot password?"
-            type="TERITARY"
-          />
-
-          <CustomButton
-            onPress={onPressFacebook}
-            text="Login with Facebook"
-            type="SECONDARY"
-            txtColor="#4765A9"
-            bgColor="#E7EAF4"
-          />
-          <CustomButton
-            onPress={onPressGoogle}
-            text="Login with Google"
-            type="SECONDARY"
-            txtColor="#DD4D44"
-            bgColor="#FAE9EA"
-          />
-          <CustomButton
-            onPress={onPressApple}
-            text="Login with Apple"
-            type="SECONDARY"
-            txtColor="#363636"
-            bgColor="#e3e3e3"
-          />
-          <CustomButton
-            onPress={onPressCreateAccount}
-            text="Don't have an account? Create one"
-            type="TERITARY"
-          />
-        </View>
-      </LinearGradient>
+      <View style={styles.root}>
+        <Image source={Logo} style={[styles.logo, { height: height * 0.3 }]} />
+        <CustomInput
+          title="Username"
+          username={username}
+          setUsername={setUsername}
+        />
+        <CustomInput
+          title="Password"
+          password={password}
+          setPassword={setPassword}
+          secureTextEntry={true}
+        />
+        <CustomButton onPress={onPressLogin} text="Login" type="PRIMARY" />
+        <CustomButton onPress={onPressSignup} text="Signup" type="SECONDARY" />
+        <CustomButton
+          onPress={onPressForgotPassword}
+          text="Forgot password?"
+          type="TERITARY"
+        />
+        <View style={styles.space} />
+        <CustomButton
+          onPress={onPressFacebook}
+          text="Login with Facebook"
+          type="SECONDARY"
+          txtColor="#4765A9"
+          bgColor="#E7EAF4"
+        />
+        <CustomButton
+          onPress={onPressGoogle}
+          text="Login with Google"
+          type="SECONDARY"
+          txtColor="#DD4D44"
+          bgColor="#FAE9EA"
+        />
+        <CustomButton
+          onPress={onPressApple}
+          text="Login with Apple"
+          type="SECONDARY"
+          txtColor="#363636"
+          bgColor="#e3e3e3"
+        />
+        <CustomButton
+          onPress={onPressCreateAccount}
+          text="Don't have an account? Create one"
+          type="TERITARY"
+        />
+      </View>
     </ScrollView>
   );
 }
@@ -113,18 +104,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
   },
-
   logo: {
     width: "60%",
     maxWidth: 300,
     maxHeight: 100,
     resizeMode: "contain",
     marginBottom: 15,
-    marginTop: 70,
+    marginTop: 20,
   },
-  subtitle: {
-    color: "white",
-    textAlign: "center",
-    marginBottom: 5,
+  space: {
+    height: 20,
   },
 });

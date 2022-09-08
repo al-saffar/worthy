@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useState, createContext } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 
 import Dashboard from "./screens/Dashboard";
 import Category from "./screens/Category";
@@ -14,12 +14,24 @@ export default function App() {
   const LoginContext = createContext();
   const [isLoggedIn, setIsLoggedin] = useState(false);
 
-  return <Login />;
+  return (
+    <>
+      {/* safeareaview with gradiant work around */}
+      <SafeAreaView style={{ flex: 0, backgroundColor: "white" }} />
+      <SafeAreaView style={styles.root}>
+        <LinearGradient colors={["#101010", "#2B2B2B"]} style={{ flex: 1 }}>
+          {/* <Signup /> */}
+          <Login />
+        </LinearGradient>
+      </SafeAreaView>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    backgroundColor: "black",
   },
 });
 

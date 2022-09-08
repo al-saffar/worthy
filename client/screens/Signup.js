@@ -1,31 +1,113 @@
-import { Text } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  useWindowDimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
-import styles from "../styles";
+import CustomButton from "../components/CustomButton";
 
-export default function Signup({ navigation }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+export default function Signup() {
+  const { height } = useWindowDimensions();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  function onPressLogin() {
+    console.warn("Login is pressed");
+  }
+
+  function onPressSignup() {
+    console.warn("Signup is pressed");
+  }
+
+  function onPressForgotPassword() {
+    console.warn("Forgot password is pressed");
+  }
+
+  function onPressFacebook() {
+    console.warn("Login with Facebook is pressed");
+  }
+
+  function onPressGoogle() {
+    console.warn("Login with Google is pressed");
+  }
+
+  function onPressApple() {
+    console.warn("Login with Apple is pressed");
+  }
+
+  function onPressCreateAccount() {
+    console.warn("Create an account is pressed");
+  }
+
   return (
-    <LinearGradient colors={["#101010", "#2B2B2B"]} style={styles.background}>
-      <Text style={styles.worthy}>WORTHY</Text>
-      <Text style={styles.title1}>Create an account</Text>
-      <CustomInput title="Name" name={name} setName={setName} />
-      <CustomInput title="Email" email={email} setEmail={setEmail} />
-      <CustomInput
-        title="Username"
-        username={username}
-        setUsername={setUsername}
-      />
-      <CustomInput
-        title="Password"
-        password={password}
-        setPassword={setPassword}
-      />
-    </LinearGradient>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.root}>
+        <Text style={styles.title}>Create an account</Text>
+        <CustomInput
+          title="Username"
+          username={username}
+          setUsername={setUsername}
+        />
+        <CustomInput
+          title="Password"
+          password={password}
+          setPassword={setPassword}
+          secureTextEntry={true}
+        />
+        <CustomButton onPress={onPressLogin} text="Login" type="PRIMARY" />
+        <CustomButton onPress={onPressSignup} text="Signup" type="SECONDARY" />
+        <CustomButton
+          onPress={onPressForgotPassword}
+          text="Forgot password?"
+          type="TERITARY"
+        />
+
+        <CustomButton
+          onPress={onPressFacebook}
+          text="Login with Facebook"
+          type="SECONDARY"
+          txtColor="#4765A9"
+          bgColor="#E7EAF4"
+        />
+        <CustomButton
+          onPress={onPressGoogle}
+          text="Login with Google"
+          type="SECONDARY"
+          txtColor="#DD4D44"
+          bgColor="#FAE9EA"
+        />
+        <CustomButton
+          onPress={onPressApple}
+          text="Login with Apple"
+          type="SECONDARY"
+          txtColor="#363636"
+          bgColor="#e3e3e3"
+        />
+        <CustomButton
+          onPress={onPressCreateAccount}
+          text="Don't have an account? Create one"
+          type="TERITARY"
+        />
+      </View>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    alignItems: "center",
+    padding: 10,
+  },
+  title: {
+    color: "white",
+    textAlign: "center",
+    marginBottom: 35,
+    fontSize: 24,
+    marginTop: 30,
+  },
+});
