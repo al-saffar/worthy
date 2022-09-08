@@ -46,7 +46,7 @@ export default function Login() {
   }
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <LinearGradient colors={["#101010", "#2B2B2B"]} style={styles.background}>
         <View style={styles.root}>
           <Image
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     maxHeight: 100,
     resizeMode: "contain",
     marginBottom: 15,
+    marginTop: 70,
   },
   subtitle: {
     color: "white",

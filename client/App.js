@@ -14,6 +14,16 @@ export default function App() {
   const LoginContext = createContext();
   const [isLoggedIn, setIsLoggedin] = useState(false);
 
+  return <Login />;
+}
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
+
+/* 
   return isLoggedIn ? (
     <View style={styles.root}>
       <LoginContext.Provider value={isLoggedIn}>
@@ -41,10 +51,4 @@ export default function App() {
       </LoginContext.Provider>
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-});
+*/
