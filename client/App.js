@@ -17,7 +17,6 @@ export default function App() {
   return (
     <>
       {/* safeareaview with gradiant work around */}
-      <SafeAreaView style={{ flex: 0, backgroundColor: "white" }} />
       <SafeAreaView style={styles.root}>
         <Navigation />
       </SafeAreaView>
