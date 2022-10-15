@@ -7,6 +7,8 @@ import { category } from "../category";
 import Goal from "../components/Goal";
 import CategoryList from "../components/CategoryList";
 import CustomCircleDiagram from "../components/CustomCircleDiagram";
+import ScreenTemplate from "../components/ScreenTemplate";
+import TotalWorth from "../components/TotalWorth";
 
 export default function Home() {
   const [totalAmount, setTotalAmount] = useState();
@@ -27,21 +29,21 @@ export default function Home() {
 
   return (
     <ScrollView>
-      <View>
-        <Text>Homescreen</Text>
-        <Text>Greeting to, </Text>
-        <Text>TOTAL WORTH</Text>
-        <Text style={styles.totalworth}>{totalAmount} DKK</Text>
-        <Goal />
-        <CustomCircleDiagram />
-        <CategoryList navigation={navigation} totalAmount={totalAmount} />
-
-        <CustomButton
-          onPress={goBack}
-          text="GO BACK"
-          type="PRIMARY"
-        ></CustomButton>
-      </View>
+      <ScreenTemplate>
+        <View style={styles.root}>
+          <Text style={{ color: "white" }}>Homescreen</Text>
+          <Text style={{ color: "white" }}>Greeting to, </Text>
+          <TotalWorth totalAmount={totalAmount} />
+          <Goal />
+          <CustomCircleDiagram />
+          <CategoryList navigation={navigation} totalAmount={totalAmount} />
+          <CustomButton
+            onPress={goBack}
+            text="GO BACK"
+            type="PRIMARY"
+          ></CustomButton>
+        </View>
+      </ScreenTemplate>
     </ScrollView>
   );
 }
@@ -51,19 +53,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 10,
-  },
-  totalworth: {
-    color: "white",
-    height: 54,
-    top: 37,
-    fontStyle: "normal",
-    fontWeight: "400",
-    fontSize: 30,
-    lineHeight: 43,
-    //text-shadow: 0px 4px 4px #000000
-    textShadowColor: "#000000",
-    textShadowOffset: { width: 0, height: 4 },
-    textShadowRadius: 4,
-    textAlign: "center",
   },
 });

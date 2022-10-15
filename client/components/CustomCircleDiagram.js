@@ -5,9 +5,10 @@ export default function CustomCircleDiagram() {
 }
 const styles = StyleSheet.create({
   circle: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     backgroundColor: "green",
-    borderRadius: 50,
+    borderRadius: 100,
+    marginBottom: 30,
   },
 });
