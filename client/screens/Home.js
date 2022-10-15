@@ -6,6 +6,7 @@ import { category } from "../category";
 
 import Goal from "../components/Goal";
 import CategoryList from "../components/CategoryList";
+import CustomCircleDiagram from "../components/CustomCircleDiagram";
 
 export default function Home() {
   const [totalAmount, setTotalAmount] = useState();
@@ -32,7 +33,9 @@ export default function Home() {
         <Text>TOTAL WORTH</Text>
         <Text style={styles.totalworth}>{totalAmount} DKK</Text>
         <Goal />
+        <CustomCircleDiagram />
         <CategoryList navigation={navigation} totalAmount={totalAmount} />
+
         <CustomButton
           onPress={goBack}
           text="GO BACK"
