@@ -1,18 +1,14 @@
 import { View, Dimensions } from "react-native";
-import styles from "./../styles";
 import { category } from "../category";
-import { useEffect, useState } from "react";
 import { PieChart } from "react-native-chart-kit";
 
 export default function CircleDiagram() {
-  const [total, setTotal] = useState(0);
+  /* const [total, setTotal] = useState(0); */
 
-  useEffect(() => {}, []);
-
-  function calculateTotalWorth(data) {
+  /*   function calculateTotalWorth(data) {
     let sum = data.reduce((partialSum, item) => partialSum + item.amount, 0);
     setTotal(sum);
-  }
+  } */
 
   const chartConfig = {
     backgroundGradientFrom: "#1E2923",
