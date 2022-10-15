@@ -4,6 +4,7 @@ import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import SocialLoginButtons from "../components/SocialLoginButtons";
 import ScreenTemplate from "../components/ScreenTemplate";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -11,8 +12,11 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
 
+  const navigation = useNavigation();
+
   function onPressRegister() {
-    console.warn("Login is pressed");
+    console.warn("Register is pressed");
+    navigation.navigate("Dashboard");
   }
 
   function onPressTermsOfUse() {
