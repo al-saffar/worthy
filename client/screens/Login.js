@@ -21,7 +21,6 @@ export default function Login() {
   const navigation = useNavigation();
 
   function onPressLogin() {
-    // validate user
     navigation.navigate("Home");
   }
 
