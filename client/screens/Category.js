@@ -2,7 +2,6 @@ import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
-import styles from "./../styles";
 
 export default function Category() {
   const [text, setText] = useState("");

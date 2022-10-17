@@ -1,8 +1,7 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import styles from "./../styles";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { category } from "../category";
 
-export default function CategoryList({ navigation, totalAmount }) {
+export default function CategoryList({ totalAmount }) {
   function calculatePercentage(amount) {
     let percent = ((amount / totalAmount) * 100).toFixed(2);
     return percent;
@@ -51,3 +50,54 @@ export default function CategoryList({ navigation, totalAmount }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  addbutton: {
+    marginTop: 5,
+    marginBottom: 5,
+    borderColor: "#868686",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderRadius: 50,
+    width: 25,
+    height: 25,
+  },
+  frame: {
+    marginBottom: 30,
+    marginLeft: 30,
+    marginRight: 30,
+  },
+  title2: {
+    color: "white",
+    textTransform: "uppercase",
+    paddingBottom: 10,
+  },
+  box: {
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 320,
+  },
+  listitems: {
+    flexWrap: "wrap",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  listitemsleft: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  listtexts: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  listtext: {
+    color: "black",
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+});
