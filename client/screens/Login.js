@@ -14,7 +14,8 @@ import ScreenTemplate from "../components/ScreenTemplate";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  //const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { height } = useWindowDimensions();
@@ -40,11 +41,7 @@ export default function Login() {
             source={Logo}
             style={[styles.logo, { height: height * 0.3 }]}
           />
-          <CustomInput
-            title="Username"
-            value={username}
-            setValue={setUsername}
-          />
+          <CustomInput title="Email" value={email} setValue={setEmail} />
           <CustomInput
             title="Password"
             value={password}

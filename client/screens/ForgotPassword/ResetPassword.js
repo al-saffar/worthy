@@ -5,7 +5,8 @@ import CustomButton from "../../components/CustomButton";
 import ScreenTemplate from "../../components/ScreenTemplate";
 
 export default function ResetPassword() {
-  const [username, setUsername] = useState("");
+  //const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
   function onPressConfirm() {
     console.warn("Confirm is pressed");
@@ -20,11 +21,7 @@ export default function ResetPassword() {
       <ScreenTemplate>
         <View style={styles.root}>
           <Text style={styles.title}>Reset your password</Text>
-          <CustomInput
-            title="Username *"
-            value={username}
-            setValue={setUsername}
-          />
+          <CustomInput title="Email *" value={email} setValue={setEmail} />
 
           <CustomButton onPress={onPressConfirm} text="Send" type="PRIMARY" />
           <CustomButton

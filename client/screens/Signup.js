@@ -7,7 +7,9 @@ import ScreenTemplate from "../components/ScreenTemplate";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Signup() {
-  const [username, setUsername] = useState("");
+  //const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
@@ -37,9 +39,14 @@ export default function Signup() {
         <View style={styles.root}>
           <Text style={styles.title}>Create an account</Text>
           <CustomInput
-            title="Username"
-            value={username}
-            setValue={setUsername}
+            title="Firstname"
+            value={firstName}
+            setValue={setFirstName}
+          />
+          <CustomInput
+            title="Lastname"
+            value={lastName}
+            setValue={setLastName}
           />
           <CustomInput title="Email" username={email} setUsername={setEmail} />
           <CustomInput
