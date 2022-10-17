@@ -3,10 +3,12 @@ import { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import ScreenTemplate from "../../components/ScreenTemplate";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ResetPassword() {
   //const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const navigation = useNavigation();
 
   function onPressConfirm() {
     console.warn("Confirm is pressed");
@@ -14,6 +16,7 @@ export default function ResetPassword() {
 
   function onPressBackToLogin() {
     console.warn("Back to Login is pressed");
+    navigation.navigate("Login");
   }
 
   return (

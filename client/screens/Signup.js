@@ -8,17 +8,49 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Signup() {
   //const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [firstName, setFirstName] = useState("Møffe");
+  const [lastName, setLastName] = useState("l-møffe");
+  const [email, setEmail] = useState("møffe@gamil.com");
+  const [password, setPassword] = useState("123");
+  const [passwordRepeat, setPasswordRepeat] = useState("123");
 
   const navigation = useNavigation();
 
   function onPressRegister() {
     console.warn("Register is pressed");
-    navigation.navigate("Dashboard");
+
+    postExample();
+
+    //`192.168.0.210/user/add -d firstName=${firstName}-d lastName=${lastName} -d email=${email}`;
+
+    //navigation.navigate("Dashboard");
+
+    //fetch("192.168.0.210/"
+  }
+
+  async function postExample() {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      }),
+    };
+    try {
+      await fetch("192.168.0.210/user/add", requestOptions).then((response) => {
+        response.json().then((data) => {
+          Alert.alert("Post created at : ", data.createdAt);
+        });
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function onPressTermsOfUse() {

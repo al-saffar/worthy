@@ -14,6 +14,7 @@ export default function NewPassword() {
 
   function onPressBackToLogin() {
     console.warn("Back to Login is pressed");
+    navigation.navigate("ResetPassword");
   }
 
   return (
