@@ -43,13 +43,15 @@ export default function Signup() {
       }),
     };
     try {
-      await fetch("192.168.0.210/user/add", requestOptions).then((response) => {
-        response.json().then((data) => {
-          Alert.alert("Post created at : ", data.createdAt);
-        });
-      });
+      await fetch("http://127.0.0.1:8080/user/add", requestOptions).then(
+        (response) => {
+          response.json().then((data) => {
+            Alert.alert("Post created at : ", data.createdAt);
+          });
+        }
+      );
     } catch (error) {
-      console.error(error);
+      console.error("fejlen?", error);
     }
   }
 

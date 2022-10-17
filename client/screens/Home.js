@@ -13,10 +13,26 @@ import TotalWorth from "../components/TotalWorth";
 export default function Home() {
   const [totalAmount, setTotalAmount] = useState();
   const navigation = useNavigation();
+  const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
+    getGreeting();
     calculateTotalAmount(category);
   }, []);
+
+  async function getGreeting() {
+    try {
+      const response = await fetch("http://localhost:8080/greeting", {
+        mode: "cors",
+      });
+      const json = await response.json();
+      setGreeting(json.content);
+      console.warn(json.content);
+      console.warn(greeting);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   function goBack() {
     navigation.navigate("Login");
@@ -32,7 +48,9 @@ export default function Home() {
       <ScreenTemplate>
         <View style={styles.root}>
           <Text style={{ color: "white" }}>Homescreen</Text>
-          <Text style={{ color: "white" }}>Greeting to, </Text>
+          <Text style={{ color: "white" }}>
+            Greeting to, {greeting ? greeting : "ingen"}
+          </Text>
           <TotalWorth totalAmount={totalAmount} />
           <Goal />
           <CustomCircleDiagram />
