@@ -28,13 +28,7 @@ export default function CategoryList({ totalAmount, categories }) {
             {console.log("loading is", loading)}
           </>
         ) : (
-          <>
-            {categories.map((c) => {
-              <Text>{c.name}</Text>;
-            })}
-
-            {console.log("loading is", loading)}
-          </>
+          <></>
         )}
         <TouchableOpacity
           style={styles.addbutton}

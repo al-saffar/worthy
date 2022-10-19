@@ -3,16 +3,10 @@ import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 
-import Goal from "../components/Goal";
-import CategoryList from "../components/CategoryList";
-import CustomCircleDiagram from "../components/CustomCircleDiagram";
 import ScreenTemplate from "../components/ScreenTemplate";
-import TotalWorth from "../components/TotalWorth";
 
 export default function Home() {
-  const [totalAmount, setTotalAmount] = useState();
   const navigation = useNavigation();
-  const [greeting, setGreeting] = useState("");
 
   const [isLoading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -20,8 +14,7 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     getCategories();
-    console.log("jjnef", categories);
-    calculateTotalAmount();
+    console.log("useEffect cat: ", categories);
   }, []);
 
   async function getCategories() {
@@ -32,7 +25,7 @@ export default function Home() {
       let jsonData = await response.json();
       setCategories(jsonData);
       setLoading(false);
-      console.log("json", jsonData);
+      console.log("jsonData", jsonData);
     } catch (error) {
       console.error(error);
     }
@@ -40,16 +33,6 @@ export default function Home() {
 
   function goBack() {
     navigation.navigate("Login");
-  }
-
-  function calculateTotalAmount() {
-    if (!isLoading) {
-      console.log("cat", categories);
-      /*       categories.map(() => {
-        let total = reduce((total, curr) => total + curr.amount, 0);
-        setTotalAmount(total);
-      }); */
-    }
   }
 
   return (
@@ -61,17 +44,13 @@ export default function Home() {
           ) : (
             <>
               <Text style={{ color: "white" }}>Homescreen</Text>
-              <Text style={{ color: "white" }}>
-                Hey {greeting ? greeting : "missing data"}
-              </Text>
-              {isLoading ? (
-                <Text>Loading..</Text>
-              ) : (
-                <TotalWorth totalAmount={totalAmount} />
-              )}
-              <Goal />
-              <CustomCircleDiagram />
-              <CategoryList categories={categories} totalAmount={totalAmount} />
+              <>
+                {categories.map((c) => {
+                  <Text key={c.id} style={{ color: "red" }}>
+                    {c.name}
+                  </Text>;
+                })}
+              </>
               <CustomButton
                 onPress={goBack}
                 text="GO BACK"
@@ -116,3 +95,13 @@ const styles = StyleSheet.create({
       console.error(error);
     }
   } */
+
+/* function calculateTotalAmount() {
+    if (!isLoading) {
+      console.log("calculateTotalAmount cat", categories);
+      /*       categories.map(() => {
+        let total = reduce((total, curr) => total + curr.amount, 0);
+        setTotalAmount(total);
+      }); 
+    }
+  }*/
