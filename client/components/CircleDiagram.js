@@ -1,5 +1,4 @@
 import { View, Dimensions } from "react-native";
-import { category } from "../category";
 import { PieChart } from "react-native-chart-kit";
 
 export default function CircleDiagram() {

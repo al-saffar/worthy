@@ -1,8 +1,6 @@
 import { Text, View } from "react-native";
 import { useEffect, useState } from "react";
 
-import { category } from "../category";
-
 import CircleDiagram from "../components/CircleDiagram";
 import CategoryList from "../components/CategoryList";
 import Goal from "../components/Goal";

@@ -1,45 +1,41 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { category } from "../category";
+import { useState, useEffect } from "react";
+import CategoryItem from "./CategoryItem";
 
-export default function CategoryList({ totalAmount }) {
+export default function CategoryList({ totalAmount, categories }) {
+  const [selectedId, setSelectedId] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log("catee", categories);
+    setLoading(false);
+    //console.log("cat name", categories[0].name);
+    //calculateTotalAmount(category);
+  }, [loading]);
+
   function calculatePercentage(amount) {
     let percent = ((amount / totalAmount) * 100).toFixed(2);
     return percent;
-  }
-
-  function categories(list) {
-    return list.map((element) => {
-      return totalAmount ? (
-        <View key={element.id} style={styles.listitemsleft}>
-          <View
-            style={{
-              height: 25,
-              width: 25,
-              borderRadius: "50%",
-              marginTop: 10,
-              marginBottom: 5,
-              backgroundColor: `${element.color}`,
-            }}
-          ></View>
-          <Text style={styles.listtext}>{element.name}</Text>
-          <Text style={styles.listtexts}>
-            {calculatePercentage(element.amount)}
-            <Text> %</Text>
-          </Text>
-        </View>
-      ) : (
-        <View>
-          <Text>Calculating</Text>
-        </View>
-      );
-    });
   }
 
   return (
     <View style={styles.frame}>
       <Text style={styles.title2}>Categories</Text>
       <View style={styles.box}>
-        {categories(category)}
+        {loading ? (
+          <>
+            <Text>Loading...</Text>
+            {console.log("loading is", loading)}
+          </>
+        ) : (
+          <>
+            {categories.map((c) => {
+              <Text>{c.name}</Text>;
+            })}
+
+            {console.log("loading is", loading)}
+          </>
+        )}
         <TouchableOpacity
           style={styles.addbutton}
           onPress={() => navigation.navigate("Category")}
@@ -100,4 +96,60 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
 });
+
+/*   function categories(list) {
+    return list.map((element) => {
+      return totalAmount ? (
+        <View key={element.id} style={styles.listitemsleft}>
+          <View
+            style={{
+              height: 25,
+              width: 25,
+              borderRadius: "50%",
+              marginTop: 10,
+              marginBottom: 5,
+              backgroundColor: `${element.color}`,
+            }}
+          ></View>
+          <Text style={styles.listtext}>{element.name}</Text>
+          <Text style={styles.listtexts}>
+            {calculatePercentage(element.amount)}
+            <Text> %</Text>
+          </Text>
+        </View>
+      ) : (
+        <View>
+          <Text>Calculating</Text>
+        </View>
+      );
+    });
+  } */
+
+/*   const Item = ({ item, onPress, backgroundColor, textColor }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+      <Text style={[styles.title, textColor]}>{item.name}</Text>
+    </TouchableOpacity>
+  ); */
+
+/*   const renderItem = ({ item }) => {
+    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+    const color = item.id === selectedId ? "white" : "black";
+
+    return (
+      <Item
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
+      />
+    );
+  }; */

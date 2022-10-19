@@ -2,7 +2,6 @@ import { ScrollView, Text, View, StyleSheet } from "react-native";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
-import { category } from "../category";
 
 import Goal from "../components/Goal";
 import CategoryList from "../components/CategoryList";
@@ -15,20 +14,25 @@ export default function Home() {
   const navigation = useNavigation();
   const [greeting, setGreeting] = useState("");
 
+  const [isLoading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    getGreeting();
-    calculateTotalAmount(category);
+    setLoading(true);
+    getCategories();
+    console.log("jjnef", categories);
+    calculateTotalAmount();
   }, []);
 
-  async function getGreeting() {
+  async function getCategories() {
     try {
-      const response = await fetch("http://localhost:8080/greeting", {
-        mode: "cors",
-      });
-      const json = await response.json();
-      setGreeting(json.content);
-      console.warn(json.content);
-      console.warn(greeting);
+      let response = await fetch(
+        "https://raw.githubusercontent.com/anitamalina/data/main/worthy/CATEGORY.json"
+      );
+      let jsonData = await response.json();
+      setCategories(jsonData);
+      setLoading(false);
+      console.log("json", jsonData);
     } catch (error) {
       console.error(error);
     }
@@ -39,27 +43,42 @@ export default function Home() {
   }
 
   function calculateTotalAmount() {
-    let total = category.reduce((total, curr) => total + curr.amount, 0);
-    setTotalAmount(total);
+    if (!isLoading) {
+      console.log("cat", categories);
+      /*       categories.map(() => {
+        let total = reduce((total, curr) => total + curr.amount, 0);
+        setTotalAmount(total);
+      }); */
+    }
   }
 
   return (
     <ScrollView>
       <ScreenTemplate>
         <View style={styles.root}>
-          <Text style={{ color: "white" }}>Homescreen</Text>
-          <Text style={{ color: "white" }}>
-            Greeting to, {greeting ? greeting : "ingen"}
-          </Text>
-          <TotalWorth totalAmount={totalAmount} />
-          <Goal />
-          <CustomCircleDiagram />
-          <CategoryList navigation={navigation} totalAmount={totalAmount} />
-          <CustomButton
-            onPress={goBack}
-            text="GO BACK"
-            type="PRIMARY"
-          ></CustomButton>
+          {isLoading ? (
+            <Text>Loading ..</Text>
+          ) : (
+            <>
+              <Text style={{ color: "white" }}>Homescreen</Text>
+              <Text style={{ color: "white" }}>
+                Hey {greeting ? greeting : "missing data"}
+              </Text>
+              {isLoading ? (
+                <Text>Loading..</Text>
+              ) : (
+                <TotalWorth totalAmount={totalAmount} />
+              )}
+              <Goal />
+              <CustomCircleDiagram />
+              <CategoryList categories={categories} totalAmount={totalAmount} />
+              <CustomButton
+                onPress={goBack}
+                text="GO BACK"
+                type="PRIMARY"
+              ></CustomButton>
+            </>
+          )}
         </View>
       </ScreenTemplate>
     </ScrollView>
@@ -73,3 +92,27 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+/*   async function getCategories1() {
+    fetch(
+      "https://raw.githubusercontent.com/anitamalina/data/main/worthy/CATEGORY.json"
+    )
+      .then((response) => response.json())
+      .then((json) => setCategories(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false), console.log("effew", categories));
+  } */
+
+/*   async function getGreeting() {
+    try {
+      const response = await fetch("http://localhost:8080/greeting", {
+        mode: "cors",
+      });
+      const json = await response.json();
+      setGreeting(json.content);
+      console.warn(json.content);
+      console.warn(greeting);
+    } catch (error) {
+      console.error(error);
+    }
+  } */
