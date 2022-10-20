@@ -1,21 +1,28 @@
-import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { ScrollView, Text, View, StyleSheet, FlatList } from "react-native";
 import CustomButton from "../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 
 import ScreenTemplate from "../components/ScreenTemplate";
+import CategoryList from "../components/CategoryList";
 
 export default function Home() {
   const navigation = useNavigation();
 
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     getCategories();
-    console.log("useEffect cat: ", categories);
+    setIsLoading(false);
   }, []);
+
+  /* calculateTotalAmount() needs the amounts from getCategories and can't calculate it before the data is there. */
+  useEffect(() => {
+    calculateTotalAmount();
+  }, [categories]);
 
   async function getCategories() {
     try {
@@ -24,8 +31,8 @@ export default function Home() {
       );
       let jsonData = await response.json();
       setCategories(jsonData);
-      setLoading(false);
-      console.log("jsonData", jsonData);
+      setIsLoading(false);
+      /* console.log("jsonData", jsonData); */
     } catch (error) {
       console.error(error);
     }
@@ -35,32 +42,30 @@ export default function Home() {
     navigation.navigate("Login");
   }
 
+  function calculateTotalAmount() {
+    categories.map(() => {
+      let total = categories.reduce((total, curr) => total + curr.amount, 0);
+      setTotalAmount(total);
+    });
+  }
+
   return (
-    <ScrollView>
-      <ScreenTemplate>
-        <View style={styles.root}>
-          {isLoading ? (
-            <Text>Loading ..</Text>
-          ) : (
-            <>
-              <Text style={{ color: "white" }}>Homescreen</Text>
-              <>
-                {categories.map((c) => {
-                  <Text key={c.id} style={{ color: "red" }}>
-                    {c.name}
-                  </Text>;
-                })}
-              </>
-              <CustomButton
-                onPress={goBack}
-                text="GO BACK"
-                type="PRIMARY"
-              ></CustomButton>
-            </>
-          )}
-        </View>
-      </ScreenTemplate>
-    </ScrollView>
+    <ScreenTemplate>
+      <View style={styles.root}>
+        {isLoading ? (
+          <Text>Loading ..</Text>
+        ) : (
+          <>
+            <CategoryList totalAmount={totalAmount} categories={categories} />
+            <CustomButton
+              onPress={goBack}
+              text="GO BACK"
+              type="PRIMARY"
+            ></CustomButton>
+          </>
+        )}
+      </View>
+    </ScreenTemplate>
   );
 }
 
@@ -71,37 +76,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-/*   async function getCategories1() {
-    fetch(
-      "https://raw.githubusercontent.com/anitamalina/data/main/worthy/CATEGORY.json"
-    )
-      .then((response) => response.json())
-      .then((json) => setCategories(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false), console.log("effew", categories));
-  } */
-
-/*   async function getGreeting() {
-    try {
-      const response = await fetch("http://localhost:8080/greeting", {
-        mode: "cors",
-      });
-      const json = await response.json();
-      setGreeting(json.content);
-      console.warn(json.content);
-      console.warn(greeting);
-    } catch (error) {
-      console.error(error);
-    }
-  } */
-
-/* function calculateTotalAmount() {
-    if (!isLoading) {
-      console.log("calculateTotalAmount cat", categories);
-      /*       categories.map(() => {
-        let total = reduce((total, curr) => total + curr.amount, 0);
-        setTotalAmount(total);
-      }); 
-    }
-  }*/

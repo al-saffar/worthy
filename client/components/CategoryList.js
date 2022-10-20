@@ -1,35 +1,44 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+} from "react-native";
+import { useState } from "react";
 import CategoryItem from "./CategoryItem";
 
 export default function CategoryList({ totalAmount, categories }) {
   const [selectedId, setSelectedId] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    console.log("catee", categories);
-    setLoading(false);
-    //console.log("cat name", categories[0].name);
-    //calculateTotalAmount(category);
-  }, [loading]);
-
-  function calculatePercentage(amount) {
-    let percent = ((amount / totalAmount) * 100).toFixed(2);
-    return percent;
+  function goToModalOfCategory(id) {
+    console.log("Pressed on specific category:", id);
   }
 
   return (
     <View style={styles.frame}>
       <Text style={styles.title2}>Categories</Text>
       <View style={styles.box}>
-        {loading ? (
-          <>
-            <Text>Loading...</Text>
-            {console.log("loading is", loading)}
-          </>
-        ) : (
-          <></>
-        )}
+        <FlatList
+          data={categories}
+          renderItem={(itemData) => {
+            return (
+              <CategoryItem
+                name={itemData.item.name}
+                id={itemData.item.id}
+                amount={itemData.item.amount}
+                color={itemData.item.color}
+                totalAmount={totalAmount}
+                onPressModalToCategory={goToModalOfCategory}
+              />
+            );
+          }}
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
+          alwaysBounceVertical={false}
+        />
+
         <TouchableOpacity
           style={styles.addbutton}
           onPress={() => navigation.navigate("Category")}
@@ -77,19 +86,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-  listitemsleft: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  listtexts: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  listtext: {
-    color: "black",
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
+
   item: {
     padding: 20,
     marginVertical: 8,
