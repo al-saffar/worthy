@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   lineStyle: {
-    borderWidth: 0.2,
-    borderColor: "#F2F2F2",
+    borderWidth: 0.4,
+    borderColor: "#dfdfdf",
     margin: 5,
   },
 });
