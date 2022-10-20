@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import { useState } from "react";
 import CategoryItem from "./CategoryItem";
 
@@ -39,12 +33,12 @@ export default function CategoryList({ totalAmount, categories }) {
           alwaysBounceVertical={false}
         />
 
-        <TouchableOpacity
+        <Pressable
           style={styles.addbutton}
           onPress={() => navigation.navigate("Category")}
         >
           <Text style={{ textAlign: "center", paddingTop: 2 }}>+</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );
