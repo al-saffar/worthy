@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 
 import ScreenTemplate from "../components/ScreenTemplate";
 import CategoryList from "../components/CategoryList";
+import Goal from "../components/Goal";
+import TotalWorth from "../components/TotalWorth";
+import Pie from "react-native-pie";
 
 export default function Home() {
   const navigation = useNavigation();
@@ -56,6 +59,13 @@ export default function Home() {
           <Text>Loading ..</Text>
         ) : (
           <>
+            <TotalWorth totalAmount={totalAmount} />
+            <Pie
+              radius={70}
+              series={[56, 11, 77]}
+              colors={["yellow", "green", "orange"]}
+            />
+            <Goal />
             <CategoryList totalAmount={totalAmount} categories={categories} />
             <CustomButton
               onPress={goBack}
@@ -73,6 +83,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: "center",
-    padding: 10,
+    padding: 20,
   },
 });

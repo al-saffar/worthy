@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useState, createContext } from "react";
+import { StatusBar } from "expo-status-bar";
 
 import { StyleSheet, SafeAreaView } from "react-native";
 
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <>
       {/* safeareaview with gradiant work around */}
+      <StatusBar style="light" />
       <SafeAreaView style={styles.root}>
         <Navigation />
       </SafeAreaView>

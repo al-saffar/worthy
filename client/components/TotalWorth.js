@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 30,
     lineHeight: 43,
-    textShadowColor: "#FFF",
-    textShadowOffset: { width: 0, height: 3 },
-    textShadowRadius: 4,
+    /*     textShadowColor: "#FFF",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2, */
     textAlign: "center",
   },
 });
