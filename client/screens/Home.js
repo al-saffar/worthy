@@ -7,8 +7,6 @@ import ScreenTemplate from "../components/ScreenTemplate";
 import CategoryList from "../components/CategoryList";
 import Goal from "../components/Goal";
 import TotalWorth from "../components/TotalWorth";
-import Pie from "react-native-pie";
-
 export default function Home() {
   const navigation = useNavigation();
 
@@ -60,11 +58,9 @@ export default function Home() {
         ) : (
           <>
             <TotalWorth totalAmount={totalAmount} />
-            <Pie
-              radius={70}
-              series={[56, 11, 77]}
-              colors={["yellow", "green", "orange"]}
-            />
+
+            {/* PIE CHART */}
+
             <Goal />
             <CategoryList totalAmount={totalAmount} categories={categories} />
             <CustomButton
