@@ -17,6 +17,7 @@ export default function Login() {
   //const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [access, requireAccess] = useState("");
 
   const { height } = useWindowDimensions();
   const navigation = useNavigation();

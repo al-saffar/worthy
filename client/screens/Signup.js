@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
@@ -8,27 +8,23 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Signup() {
   //const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("Møffe");
-  const [lastName, setLastName] = useState("l-møffe");
-  const [email, setEmail] = useState("møffe@gamil.com");
-  const [password, setPassword] = useState("123");
-  const [passwordRepeat, setPasswordRepeat] = useState("123");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordRepeat, setPasswordRepeat] = useState("");
+
+  // TO DO: sha1 react (lave crypteret password)
 
   const navigation = useNavigation();
 
   function onPressRegister() {
     console.warn("Register is pressed");
-
-    postExample();
-
-    //`192.168.0.210/user/add -d firstName=${firstName}-d lastName=${lastName} -d email=${email}`;
-
-    //navigation.navigate("Dashboard");
-
-    //fetch("192.168.0.210/"
+    createNewUser();
   }
 
-  async function postExample() {
+  // create user en backend - works!
+  async function createNewUser() {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -43,7 +39,8 @@ export default function Signup() {
       }),
     };
     try {
-      await fetch("http://127.0.0.1:8080/user/add", requestOptions).then(
+      //console.log("requestion", requestOptions);
+      await fetch("http://192.168.0.210:8080/user/add", requestOptions).then(
         (response) => {
           response.json().then((data) => {
             Alert.alert("Post created at : ", data.createdAt);
@@ -74,25 +71,21 @@ export default function Signup() {
           <Text style={styles.title}>Create an account</Text>
           <CustomInput
             title="Firstname"
-            value={firstName}
-            setValue={setFirstName}
+            text={firstName}
+            setText={setFirstName}
           />
-          <CustomInput
-            title="Lastname"
-            value={lastName}
-            setValue={setLastName}
-          />
-          <CustomInput title="Email" username={email} setUsername={setEmail} />
+          <CustomInput title="Lastname" text={lastName} setText={setLastName} />
+          <CustomInput title="Email" text={email} setText={setEmail} />
           <CustomInput
             title="Password"
-            value={password}
-            setValue={setPassword}
+            text={password}
+            setText={setPassword}
             secureTextEntry={true}
           />
           <CustomInput
             title="Repeat Password"
-            value={passwordRepeat}
-            setValue={setPasswordRepeat}
+            text={passwordRepeat}
+            setText={setPasswordRepeat}
             secureTextEntry={true}
           />
           <CustomButton
