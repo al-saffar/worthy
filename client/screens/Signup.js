@@ -29,7 +29,7 @@ export default function Signup() {
   const navigation = useNavigation();
 
   function onPressRegister() {
-    console.warn("Register is pressed");
+    console.log("Register is pressed");
     createNewUser();
   }
 
@@ -63,15 +63,16 @@ export default function Signup() {
   }
 
   function onPressTermsOfUse() {
-    console.warn("Terms of Use pressed");
+    console.log("Terms of Use pressed");
   }
 
   function onPressPrivacyPolicy() {
-    console.warn("Privacy Policy pressed");
+    console.log("Privacy Policy pressed");
   }
 
   function onPressLogin() {
-    console.warn("Login is pressed");
+    console.log("Login is pressed");
+    navigation.navigate("Login");
   }
 
   if (success === "User created") {
