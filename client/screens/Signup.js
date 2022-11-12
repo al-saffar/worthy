@@ -1,4 +1,10 @@
-import { View, Text, ScrollView, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
@@ -13,8 +19,12 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [success, setSuccess] = useState("");
 
-  // TO DO: sha1 react (lave crypteret password)
+  // TODO: sha1 react (lave crypteret password)
+  // TODO: verify that the passwords are the same
+  // TODO: check that all the fields are not null and e-mail has a "@"
+  // TODO: feedback to user with successfully signed up..
 
   const navigation = useNavigation();
 
@@ -40,15 +50,15 @@ export default function Signup() {
     };
     try {
       //console.log("requestion", requestOptions);
-      await fetch("http://192.168.0.210:8080/user/add", requestOptions).then(
-        (response) => {
-          response.json().then((data) => {
-            Alert.alert("Post created at : ", data.createdAt);
-          });
-        }
+      const response = await fetch(
+        "http://192.168.0.210:8080/user/add",
+        requestOptions
       );
+      const data = await response.text(); //recieve a string
+      console.log("data", data);
+      setSuccess(data);
     } catch (error) {
-      console.error("fejlen?", error);
+      console.error("Error message: ", error);
     }
   }
 
@@ -64,6 +74,41 @@ export default function Signup() {
     console.warn("Login is pressed");
   }
 
+  if (success === "User created") {
+    navigation.navigate("Home");
+  }
+
+  let mail = (
+    <CustomInput
+      title="Email"
+      text={email}
+      setText={setEmail}
+      autoCapitalize="none"
+    />
+  );
+
+  if (success === "User already exists") {
+    mail = (
+      <>
+        <CustomInput
+          title="Email"
+          text={email}
+          setText={setEmail}
+          autoCapitalize="none"
+        />
+        <Text style={styles.mailExists}>
+          User already exists.{" "}
+          <TouchableWithoutFeedback
+            style={styles.pressLogin}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text style={styles.mailLogin}>Please Login</Text>
+          </TouchableWithoutFeedback>
+        </Text>
+      </>
+    );
+  }
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <ScreenTemplate>
@@ -75,7 +120,7 @@ export default function Signup() {
             setText={setFirstName}
           />
           <CustomInput title="Lastname" text={lastName} setText={setLastName} />
-          <CustomInput title="Email" text={email} setText={setEmail} />
+          {mail}
           <CustomInput
             title="Password"
             text={password}
@@ -136,5 +181,16 @@ const styles = StyleSheet.create({
   },
   link: {
     color: "#FFA800",
+  },
+  mailExists: {
+    color: "red",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: -15,
+    marginBottom: 10,
+  },
+  mailLogin: {
+    color: "red",
+    textDecorationLine: "underline",
   },
 });

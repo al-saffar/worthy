@@ -7,7 +7,7 @@ export default function CustomInput({ text, setText, title, secureTextEntry }) {
       <TextInput
         style={styles.input}
         value={text}
-        onChangeText={setText}
+        onChangeText={(text) => setText(text.toLowerCase())}
         secureTextEntry={secureTextEntry}
       />
     </View>

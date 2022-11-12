@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Image,
   useWindowDimensions,
+  Alert,
 } from "react-native";
 import Logo from "../assets/images/Worthy.png";
 import { useState } from "react";
@@ -17,13 +18,25 @@ export default function Login() {
   //const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [access, requireAccess] = useState("");
+  const [approvedAccess, setApprovedAccess] = useState(false);
 
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
 
+  // TODO: Login as a useContext
+  // TODO:  sha1 react (lave crypteret password)
+
   function onPressLogin() {
-    navigation.navigate("Home");
+    sendLoginDetails();
+
+    if (approvedAccess) {
+      navigation.navigate("Home");
+    } else {
+      Alert.alert(
+        "E-mail or password is wrong",
+        "We couldn't log you in because your e-mail or password is wrong. Please try again, or reset your password if you forgot it."
+      );
+    }
   }
 
   function onPressSignup() {
@@ -34,6 +47,32 @@ export default function Login() {
     navigation.navigate("ResetPassword");
   }
 
+  async function sendLoginDetails() {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    };
+    try {
+      //console.log("requestion", requestOptions);
+      const response = await fetch(
+        "http://192.168.0.210:8080/user/login",
+        requestOptions
+      );
+      const data = await response.json();
+      setApprovedAccess(data);
+      console.log("data: ", data);
+    } catch (error) {
+      console.error("Error message: ", error);
+    }
+  }
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <ScreenTemplate>
@@ -42,11 +81,11 @@ export default function Login() {
             source={Logo}
             style={[styles.logo, { height: height * 0.3 }]}
           />
-          <CustomInput title="Email" value={email} setValue={setEmail} />
+          <CustomInput title="Email" text={email} setText={setEmail} />
           <CustomInput
             title="Password"
-            value={password}
-            setValue={setPassword}
+            text={password}
+            setText={setPassword}
             secureTextEntry={true}
           />
           <CustomButton onPress={onPressLogin} text="Login" type="PRIMARY" />
