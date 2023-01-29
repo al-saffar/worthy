@@ -19,7 +19,11 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
+<<<<<<< Updated upstream
   const [success, setSuccess] = useState("");
+=======
+  const [response, setResponse] = useState(false);
+>>>>>>> Stashed changes
 
   // TODO: sha1 react (lave crypteret password)
   // TODO: verify that the passwords are the same
@@ -31,6 +35,11 @@ export default function Signup() {
   function onPressRegister() {
     console.log("Register is pressed");
     createNewUser();
+    if (response) {
+      navigation.navigate("Login");
+    } else {
+      Alert.alert("Something went wrong!!! Please try again.");
+    }
   }
 
   // create user en backend - works!
@@ -50,9 +59,19 @@ export default function Signup() {
     };
     try {
       //console.log("requestion", requestOptions);
+<<<<<<< Updated upstream
       const response = await fetch(
         "http://192.168.0.210:8080/user/add",
         requestOptions
+=======
+      await fetch("http://192.168.0.114:8080/user/add", requestOptions).then(
+        (response) => {
+          response.json().then((data) => {
+            setResponse(data);
+            console.log("response ", data);
+          });
+        }
+>>>>>>> Stashed changes
       );
       const data = await response.text(); //recieve a string
       console.log("data", data);
