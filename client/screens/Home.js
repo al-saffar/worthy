@@ -11,31 +11,62 @@ export default function Home() {
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [portfolio, setPortfolio] = useState();
+  const [userId, setUserId] = useState();
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
-    getCategories();
+    getUserData();
     setIsLoading(false);
   }, []);
 
-  /* calculateTotalAmount() needs the amounts from getCategories and can't calculate it before the data is there. */
+  /* calculateTotalAmount() needs the amounts from getPortfolio and can't calculate it before the data is there. */
   useEffect(() => {
-    calculateTotalAmount();
-  }, [categories]);
+    //calculateTotalAmount();
+  }, [portfolio]);
 
-  async function getCategories() {
+  async function getUserData() {
     try {
       let response = await fetch(
-        "https://raw.githubusercontent.com/anitamalina/data/main/worthy/CATEGORY.json"
+        //"https://raw.githubusercontent.com/anitamalina/data/main/worthy/CATEGORY.json"
+        "http://192.168.0.114:8080/user/me"
       );
       let jsonData = await response.json();
-      setCategories(jsonData);
+      setUserId(jsonData.id);
+      console.log("jjdata id: ", jsonData.id);
+      getPortfolio();
       setIsLoading(false);
-      /* console.log("jsonData", jsonData); */
+      console.log("jsonData", jsonData);
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  //RIGHT HERE: Need to get portfolio data with id 52..
+  async function getPortfolio() {
+    //console.log("portfolio id", userId);
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: "52",
+      }),
+    };
+    try {
+      //console.log("requestion", requestOptions);
+      const response = await fetch(
+        "http://192.168.0.114:8080/portfolio/myPortfolio",
+        requestOptions
+      );
+      const jsonData = await response.json();
+      setPortfolio(jsonData);
+      console.log("portfolio data: ", jsonData);
+    } catch (error) {
+      console.error("Error message: ", error);
     }
   }
 
@@ -44,8 +75,8 @@ export default function Home() {
   }
 
   function calculateTotalAmount() {
-    categories.map(() => {
-      let total = categories.reduce((total, curr) => total + curr.amount, 0);
+    portfolio.map(() => {
+      let total = portfolio.reduce((total, curr) => total + curr.amount, 0);
       setTotalAmount(total);
     });
   }
@@ -57,12 +88,13 @@ export default function Home() {
           <Text>Loading ..</Text>
         ) : (
           <>
-            <TotalWorth totalAmount={totalAmount} />
-
+            {/* <TotalWorth totalAmount={totalAmount} /> */}
             {/* PIE CHART */}
 
-            <Goal />
-            <CategoryList totalAmount={totalAmount} categories={categories} />
+            <TotalWorth totalAmount={portfolio.portfolioSize} />
+
+            {/* <Goal />
+            <CategoryList totalAmount={totalAmount} portfolio={portfolio} /> */}
             <CustomButton
               onPress={goBack}
               text="GO BACK"

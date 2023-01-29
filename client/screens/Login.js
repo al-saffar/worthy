@@ -7,7 +7,7 @@ import {
   Alert,
 } from "react-native";
 import Logo from "../assets/images/Worthy.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import SocialLoginButtons from "../components/SocialLoginButtons";
@@ -26,17 +26,14 @@ export default function Login() {
   // TODO: Login as a useContext
   // TODO:  sha1 react (lave crypteret password)
 
-  function onPressLogin() {
-    sendLoginDetails();
-
+  useEffect(() => {
     if (approvedAccess) {
       navigation.navigate("Home");
-    } else {
-      Alert.alert(
-        "E-mail or password is wrong",
-        "We couldn't log you in because your e-mail or password is wrong. Please try again, or reset your password if you forgot it."
-      );
     }
+  }, [approvedAccess]);
+
+  function onPressLogin() {
+    sendLoginDetails();
   }
 
   function onPressSignup() {
@@ -62,7 +59,7 @@ export default function Login() {
     try {
       //console.log("requestion", requestOptions);
       const response = await fetch(
-        "http://192.168.0.210:8080/user/login",
+        "http://192.168.0.114:8080/user/login",
         requestOptions
       );
       const data = await response.json();
