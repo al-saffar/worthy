@@ -7,45 +7,49 @@ import ScreenTemplate from "../components/ScreenTemplate";
 import CategoryList from "../components/CategoryList";
 import Goal from "../components/Goal";
 import TotalWorth from "../components/TotalWorth";
+import CryptoES from "crypto-es";
+
 export default function Home() {
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [portfolio, setPortfolio] = useState();
-  const [userId, setUserId] = useState();
+  const [portfolio, setPortfolio] = useState([]);
+  const [user, setUser] = useState({});
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
-    getUserData();
+    getUserData()
+      .then((userData) => getPortfolio(userData))
+      .then((portfolio) => calculateTotalAmount(portfolio))
+      .then(() => console.log("chain done!"))
+      .catch((error) => {
+        console.log(
+          "There has been a problem with your fetch operation: " + error.message
+        );
+        throw error;
+      });
     setIsLoading(false);
   }, []);
 
-  /* calculateTotalAmount() needs the amounts from getPortfolio and can't calculate it before the data is there. */
-  useEffect(() => {
-    //calculateTotalAmount();
-  }, [portfolio]);
-
   async function getUserData() {
     try {
-      let response = await fetch(
-        //"https://raw.githubusercontent.com/anitamalina/data/main/worthy/CATEGORY.json"
-        "http://192.168.0.114:8080/user/me"
-      );
+      let response = await fetch("http://192.168.0.114:8080/user/me");
       let jsonData = await response.json();
-      setUserId(jsonData.id);
-      console.log("jjdata id: ", jsonData.id);
-      getPortfolio();
-      setIsLoading(false);
-      console.log("jsonData", jsonData);
+      console.log("getUserData: ", jsonData);
+      return jsonData;
+      /*       setUser(jsonData); */
     } catch (error) {
       console.error(error);
     }
   }
 
-  //RIGHT HERE: Need to get portfolio data with id 52..
-  async function getPortfolio() {
-    //console.log("portfolio id", userId);
+  async function getPortfolio(userData) {
+    const encrypted = CryptoES.SHA256(
+      userData.email,
+      userData.password
+    ).toString();
+
     const requestOptions = {
       method: "POST",
       headers: {
@@ -53,18 +57,19 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: "52",
+        id: userData.id,
+        email: userData.email,
+        password: encrypted,
       }),
     };
     try {
-      //console.log("requestion", requestOptions);
       const response = await fetch(
         "http://192.168.0.114:8080/portfolio/myPortfolio",
         requestOptions
       );
       const jsonData = await response.json();
-      setPortfolio(jsonData);
-      console.log("portfolio data: ", jsonData);
+      return jsonData;
+      //setPortfolio(jsonData);
     } catch (error) {
       console.error("Error message: ", error);
     }
@@ -74,7 +79,9 @@ export default function Home() {
     navigation.navigate("Login");
   }
 
-  function calculateTotalAmount() {
+  function calculateTotalAmount(portfolio) {
+    console.log("portfolio data: ", portfolio);
+
     portfolio.map(() => {
       let total = portfolio.reduce((total, curr) => total + curr.amount, 0);
       setTotalAmount(total);
@@ -88,13 +95,13 @@ export default function Home() {
           <Text>Loading ..</Text>
         ) : (
           <>
-            {/* <TotalWorth totalAmount={totalAmount} /> */}
+            <TotalWorth totalAmount={totalAmount} />
             {/* PIE CHART */}
 
-            <TotalWorth totalAmount={portfolio.portfolioSize} />
+            {/* <Goal /> */}
 
-            {/* <Goal />
-            <CategoryList totalAmount={totalAmount} portfolio={portfolio} /> */}
+            {/* <CategoryList totalAmount={totalAmount} portfolio={portfolio} />
+             */}
             <CustomButton
               onPress={goBack}
               text="GO BACK"

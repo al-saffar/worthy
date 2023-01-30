@@ -13,6 +13,7 @@ import CustomButton from "../components/CustomButton";
 import SocialLoginButtons from "../components/SocialLoginButtons";
 import ScreenTemplate from "../components/ScreenTemplate";
 import { useNavigation } from "@react-navigation/native";
+import CryptoES from "crypto-es";
 
 export default function Login() {
   //const [username, setUsername] = useState("");
@@ -45,6 +46,9 @@ export default function Login() {
   }
 
   async function sendLoginDetails() {
+    const encrypted = CryptoES.SHA256(email, password).toString();
+    console.log("enc send: " + encrypted);
+
     const requestOptions = {
       method: "POST",
       headers: {
@@ -53,7 +57,7 @@ export default function Login() {
       },
       body: JSON.stringify({
         email: email,
-        password: password,
+        password: encrypted,
       }),
     };
     try {

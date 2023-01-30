@@ -18,8 +18,8 @@ export default function CategoryList({ totalAmount, categories }) {
           renderItem={(itemData) => {
             return (
               <CategoryItem
-                name={itemData.item.name}
-                id={itemData.item.id}
+                name={itemData.item.categoryName}
+                id={itemData.item.userId}
                 amount={itemData.item.amount}
                 color={itemData.item.color}
                 totalAmount={totalAmount}

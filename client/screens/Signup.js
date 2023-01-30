@@ -12,6 +12,7 @@ import CustomButton from "../components/CustomButton";
 import SocialLoginButtons from "../components/SocialLoginButtons";
 import ScreenTemplate from "../components/ScreenTemplate";
 import { useNavigation } from "@react-navigation/native";
+import CryptoES from "crypto-es";
 
 export default function Signup() {
   //const [username, setUsername] = useState("");
@@ -42,6 +43,9 @@ export default function Signup() {
 
   // create user en backend - works!
   async function createNewUser() {
+    // generate key
+    const encrypted = CryptoES.SHA256(email, password).toString();
+
     const requestOptions = {
       method: "POST",
       headers: {
@@ -52,7 +56,7 @@ export default function Signup() {
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: password,
+        password: encrypted,
       }),
     };
     try {
